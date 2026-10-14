@@ -69,7 +69,7 @@ resources:
 tests:
   - inputs:
       inputbam: test-data/test_chr1_chr2.bam
-      genes: test-data/gencode.vM39.annotation_short.gtf.gz
+      gtf: test-data/gencode.vM39.annotation_short.gtf.gz
     options:
       output_tsse_values: true
       output_tsse_score: true
