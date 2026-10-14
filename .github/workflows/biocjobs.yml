@@ -1,0 +1,23 @@
+# Builds the package image, generates the BiocJobs wrappers inside it and
+# tests the Galaxy tool. Wrappers and the planemo report are downloadable
+# from the run's artifacts.
+name: BiocJobs
+
+on:
+  push:
+    branches:
+      - kra-biocjobs
+  workflow_dispatch:
+
+jobs:
+  biocjobs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: kevinrue/BiocJobs/biocjobs-action@308105a1b9fd5405568149e6b724c2cd3eea738f
+        with:
+          base-image: ghcr.io/bioconductor/bioconductor:devel
+          image-tag: devel

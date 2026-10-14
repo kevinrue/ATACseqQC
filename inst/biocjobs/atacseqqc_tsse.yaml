@@ -1,0 +1,81 @@
+biocjobs: "1.0"
+name: atacseqqc_tsse
+package: ATACseqQC
+title: atacseqqc_tsse
+tagline: one line shown in tool listings
+description: >
+  Longer description of what this job computes, shown to users of the
+  generated wrappers. Two to four sentences.
+version: "0.1.0"
+license: MIT
+script: scripts/atacseqqc_tsse.R
+# depends: [pkgA, pkgB]   # R packages the script needs beyond the host package
+
+inputs:
+  - name: inputbam
+    format: bam
+    label: Short UI label
+    help: >
+      Longer help text: expected columns, units, how to produce it.
+  - name: gtf
+    format: gtf.gz
+    label: Short UI label
+    help: >
+      Longer help text: expected columns, units, how to produce it.
+
+outputs:
+  - name: tsse_plot
+    format: png
+    label: Short UI label
+
+options:
+  - name: output_tsse_values
+    type: boolean
+    default: true
+    label: Short UI label
+  - name: output_tsse_score
+    type: boolean
+    default: true
+    label: Short UI label
+  - name: region_cond
+    type: string
+    default: first
+    label: Short UI label
+  # - name: output_selector
+  #   type: choice              # boolean | choice | string | integer | float
+  #   choices: [fast, exact]
+  #   default: fast
+  #   label: Method
+  # - name: threshold
+  #   type: float
+  #   default: 0.05
+  #   min: 0
+  #   max: 1
+  #   label: Threshold
+# string options used as R formulas may need extra Galaxy sanitizer chars:
+#  - name: design
+#    type: string
+#    default: "~ condition"
+#    allow_chars: ["~"]
+
+resources:
+  cpus: 1
+  memory_gb: 4
+  disk_gb: 10
+
+# citations:
+#   - doi: 10.1000/your.method.paper
+
+tests:
+  - inputs:
+      inputbam: test-data/test_chr1_chr2.bam
+      genes: test-data/gencode.vM39.annotation_short.gtf.gz
+    options:
+      output_tsse_values: true
+      output_tsse_score: true
+      region_cond: first
+    outputs:
+      tsse_plot:
+        file: test-data/tsse_plot_chr1.png
+        compare: sim_size
+        delta: 3000
