@@ -4,7 +4,7 @@
 ## defaulted by the time it returns.
 
 # Test command (R)
-## BiocJobs::runJob(BiocJobs::readJob("inst/biocjobs/atacseqqc_tsse.yaml"), params = list(inputbam = "test-data/test_chr1_chr2.bam", gtf = "test-data/gencode.vM39.annotation_short.gtf.gz", region_cond = "first"))
+## BiocJobs::runJob(BiocJobs::readJob("inst/biocjobs/atacseqqc_tsse.yaml"), params = list(inputbam = "test-data/test_chr1_chr2.bam", gtf = "test-data/gencode.vM39.annotation_short.gtf.gz", region_cond = "first", output_tsse_values = TRUE, output_tsse_score = TRUE))
 
 ## Validation command (Bash)
 ## Rscript -e 'BiocJobs::biocjobsCLI()' validate .
@@ -74,7 +74,7 @@ tsse <- TSSEscore(gal, txs,
                   endSize = endSize, width = width, step = step)
 x_values <- seq(- updown + width / 2, updown - width / 2, step)
 
-png("tsse_plot.png")
+png(params$tsse_plot)
 plot(x_values, tsse$values, type = "b",
      xlab = "distance to TSS",
      ylab = "aggregate TSS score",
