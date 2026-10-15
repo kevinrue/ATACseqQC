@@ -77,5 +77,4 @@ tests:
     outputs:
       tsse_plot:
         file: test-data/tsse_plot_chr1.png
-        compare: sim_size
-        delta: 3000
+        compare: image_diff
